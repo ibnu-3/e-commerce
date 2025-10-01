@@ -4,6 +4,7 @@ import 'dotenv/config'
 import cookieParser from "cookie-parser"
 import colors from 'colors'
 import connectDB from "./config/db.js"
+import userRoutes from  './routes/userRoutes.js'
 const app= express()
 
 app.use(cors({
@@ -14,6 +15,7 @@ app.use(cors({
 app.use(cookieParser())
 app.use(express.json())
 connectDB()
+app.use('api/users', userRoutes)
 app.get('/', (req,res)=>{
     res.send('Hello web dev')
 })
