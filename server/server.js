@@ -15,7 +15,7 @@ app.use(cors({
 app.use(cookieParser())
 app.use(express.json())
 connectDB()
-app.use('api/users', userRoutes)
+app.use('/api/users', userRoutes)
 app.get('/', (req,res)=>{
     res.send('Hello web dev')
 })
