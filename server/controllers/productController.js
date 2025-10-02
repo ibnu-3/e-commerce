@@ -3,7 +3,7 @@ import Product from "../models/Product.js"
 
 export const getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find({}).populate('user', 'name email isAdmin').sort({ createdAt: -1 })
+        const products = await Product.find({}).populate('user', 'email isAdmin').sort({ createdAt: -1 })
         if (!products) {
             return res.status(404).json({ message: "Products not found" })
         }
@@ -15,7 +15,7 @@ export const getAllProducts = async (req, res) => {
 }
 export const getOneProduct = async (req, res) => {
     try {
-        const product = await Product.findById(req.params.id).populate('user', 'name email isAdmin').sort({ createdAt: -1 })
+        const product = await Product.findById(req.params.id).populate('user', 'email isAdmin').sort({ createdAt: -1 })
         if (!product) {
             return res.status(404).json({ message: "Product not found" })
         }
@@ -83,6 +83,7 @@ export const updateProduct = async (req, res) => {
                 })
                 product.image = await result.secure_url;
             }
+           
             const updatedProduct = await product.save()
            return res.status(201).json(updatedProduct)
         }else{
@@ -101,12 +102,26 @@ export const deleteProduct =async (req,res) => {
         if (!product) {
             return res.status(404).json({ message: "product not found" })
         }
-        if(req.user._id.toString()=== product.user.toString()){
+        if(req.user && req.user.isAdmin){
             await product.deleteOne();
             return res.status(200).json({message:"product deleted"})
         }else{
            return res.status(403).json({message:"not authorized ,admin only"})
         }
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).json({ message: 'server error', error: error.message })
+    }
+}
+
+//
+export const getPinnedProduct = async (req, res) => {
+    try {
+        const products = await Product.find({isPinned:true}).populate('user', 'email isAdmin').sort({ createdAt: -1 })
+        if (!products) {
+            return res.status(404).json({ message: "Products not found" })
+        }
+        res.status(200).json(products)
     } catch (error) {
         console.log(error.message)
         res.status(500).json({ message: 'server error', error: error.message })
