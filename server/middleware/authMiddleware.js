@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/User.js';
 
-export const protect =async (req,res,next) => {
+export const protect = async (req, res, next) => {
     let token;
     token = req.cookies.jwt;
     if (token) {
@@ -11,9 +11,16 @@ export const protect =async (req,res,next) => {
             next()
         } catch (error) {
             console.log(error)
-            res.status(401).json({message:"Not authorized, token failed"})
+            res.status(401).json({ message: "Not authorized, token failed" })
         }
     } else {
-        
+
+    }
+}
+export const admin = (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        next()
+    } else {
+        return res.status(401).json({ message: "Not authorized, Admin only" })
     }
 }
