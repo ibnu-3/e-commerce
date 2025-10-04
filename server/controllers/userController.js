@@ -61,6 +61,13 @@ export const loginUser = async (req, res) => {
     }
 }
 
+export const logoutUser = async (req,res) => {
+    res.clearCookie('jwt',{
+        httpOnly:true,
+        sameSite:'strict',
+        expires: new Date(0)
+    }).json({message:"user logout"})
+}
 //get user profile
 export const getUserProfile = async (req, res) => {
     try {

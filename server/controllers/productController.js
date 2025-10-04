@@ -28,22 +28,30 @@ export const getOneProduct = async (req, res) => {
 
 //create product 
 export const createProduct = async (req, res) => {
-    const { name, category, image, oldPrice, newPrice, countInStock } = req.body;
-
+    const { name, category, oldPrice, newPrice, countInStock } = req.body;
+const files= req.files;
     try {
         // Validate input
-        if (!name || !category || !image || !oldPrice || !newPrice || countInStock === undefined) {
+        if (!name || !category || !oldPrice || !newPrice || countInStock === undefined) {
             return res.status(400).json({ message: "All fields are required" });
         }
-        let imageUrl = ''
-        if (image) {
-            const result = await cloudinary.uploader.upload(image, { folder: 'product_image' });
-            imageUrl = await result.secure_url;
+        let imageUrls = []
+        if (files && files.length > 0) {
+            try {
+                const results = await Promise.all(files.map(file=>
+                    cloudinary.uploader.upload(file.path, { folder: 'product_images', use_filename :true})
+                ))
+                imageUrls= results.map(result=> result.secure_url);
+            } catch (error) {
+                console.log(error.message)
+                return res.status(500).json({message:"server error", error:error.message})
+            }
+           
             // Create a new product instance
             const newProduct = new Product({
                 name,
                 category,
-                image: imageUrl, // Use the URLs obtained from Cloudinary
+                image: imageUrls,
                 oldPrice,
                 newPrice,
                 countInStock,
