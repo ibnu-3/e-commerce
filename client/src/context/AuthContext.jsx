@@ -9,7 +9,7 @@ export const AuthProvider=({children})=>{
         try {
             const response =await axiosInstance.get('/api/users/me')
             setUser(response.data)
-            console.log(response.data)
+        
         } catch (error) {
             console.log(error)
             setUser(null)
@@ -44,7 +44,7 @@ export const AuthProvider=({children})=>{
             console.log(error)
         }
     }
-const value={user, login,register}
+const value={user, login,register,logout}
  return (
        <AuthContext.Provider value={value} >
         {children}

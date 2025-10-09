@@ -16,16 +16,17 @@ const Login = () => {
    
     setError("");
     setLoading(true);
+    const userData={email, password}
     try {
-      await login(email, password);
+      await login(userData);
       toast.success('Login in successfully!')
       navigate('/')
+      setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error(error || 'failed to login');
-    } finally {
       setLoading(false);
-    }
+    } 
   };
   return (
     <div className="flex items-center justify-center h-screen ">

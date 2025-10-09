@@ -15,8 +15,9 @@ const {register} = useAuth()
         e.preventDefault()
         setError('')
         setLoading(true)
+        const userData={name, email, password}
         try {
-           await register(name, email, password)
+           await register(userData)
            toast.success('Registered successfully!')
             navigate('/')           
         } catch (error) {
