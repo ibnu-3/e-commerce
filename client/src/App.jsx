@@ -7,17 +7,19 @@ import Home from './pages/Home'
 import PrivateRoute from './components/PrivateRoute'
 import ProductDetails from './pages/ProductDetails'
 import ProductList from './pages/ProductList'
+import { ProductProvider } from './context/ProductContext'
 const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <ProductProvider>
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/' element={<Home/>} />
           <Route path='/:id' element={<ProductDetails/>} />
           <Route path='/products' element={<ProductList/>} />
-        </Routes>
+        </Routes></ProductProvider>
       </AuthProvider>
     </BrowserRouter>
   )

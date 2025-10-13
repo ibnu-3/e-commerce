@@ -1,0 +1,27 @@
+import React from "react";
+import productImage from "/hero0.jpg";
+const ProductCard = ({product}) => {
+  return (
+    <div className="bg-white border rounded-lg w-64 overflow-hidden hover:scale-105 duration-300 ">
+      <img
+        src={product.image || productImage}
+        alt="image"
+        className="h-48 object-cover "
+      />
+      <div className="flex flex-col p-3">
+        <p className="text-slate-500 ">{product.category}</p>
+        <h1 className="font-bold text-xl">{product.name}</h1>
+
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <p className="text-slate-500 line-through">${product.oldPrice}</p>
+            <p className="text-blue-500 font-bold">${product.newPrice}</p>
+          </div>
+          <div className="px-4 py-2 rounded-md text-blue-400 bg-blue-200 border border-blue-500 ">Add</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;
