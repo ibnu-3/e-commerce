@@ -2,11 +2,11 @@ import React from "react";
 import productImage from "/hero0.jpg";
 const ProductCard = ({product}) => {
   return (
-    <div className="bg-white border rounded-lg w-64 overflow-hidden hover:scale-105 duration-300 ">
+    <div className="bg-white border rounded-lg  overflow-hidden hover:scale-105 duration-300 mx-6">
       <img
         src={product.image || productImage}
         alt="image"
-        className="h-48 object-cover "
+        className="h-48 object-cover w-full "
       />
       <div className="flex flex-col p-3">
         <p className="text-slate-500 ">{product.category}</p>
