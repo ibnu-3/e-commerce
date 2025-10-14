@@ -2,6 +2,7 @@ import React from 'react'
 import useAuth from '../context/useAuth'
 import {MdClose, MdSearch, MdShoppingCart} from 'react-icons/md'
 import {Link, useNavigate} from 'react-router-dom'
+import Search from './Search'
 const Navbar = () => {
    const { user,logout } = useAuth()
    const navigate=useNavigate()
@@ -17,10 +18,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <Link to={'/'}>Home</Link>
           <Link to={'/products'}>All products</Link>
-          <div className='flex items-center rounded-md bg-white'>
-            <input type="text" placeholder='Search Products'className="outline-none px-3" />
-            <MdSearch size={30}/>
-          </div>
+          <Search/>
         </div>
         <div className='flex'>
           <MdShoppingCart size={30} className=''/>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <div className='fixed bottom-0 w-full p-4 bg-sky-500 text-slate-50 capitalize '>masho &copy; 2025</div>
   )
 }
 
