@@ -4,9 +4,11 @@ import {MdClose, MdSearch, MdShoppingCart} from 'react-icons/md'
 import {Link, useNavigate} from 'react-router-dom'
 import Search from './Search'
 import Profile from './Profile'
+import useCart from '../context/hooks/useCart'
 const Navbar = () => {
   const [open, setOpen]=useState(false)
    const { user,logout } = useAuth()
+    const {cartItems}=useCart()
    const navigate=useNavigate()
    const handleLogout =async()=>{
     await logout()
@@ -24,7 +26,7 @@ const Navbar = () => {
         </div>
         <div className='flex'>
           <MdShoppingCart size={30} className=''/>
-          <span className='bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full -ml-4 -mt-3'>20</span>
+          <span className='bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full -ml-4 -mt-3'>{cartItems.length}</span>
         </div>
         {user ?(<div className='flex items-center gap-3'>
         <div className='' onClick={()=>setOpen(!open)}>

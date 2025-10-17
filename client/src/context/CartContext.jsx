@@ -17,11 +17,11 @@ export const CartProvider = ({ children }) => {
   const addToCart = (item) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(
-        (cartItem) => cartItem.id === item.id
+        (cartItem) => cartItem.id === item._id
       );
       if (existingItem) {
         return prevItems.map((cartItem) =>
-          cartItem.id === item.id
+          cartItem.id === item._id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         );
@@ -37,8 +37,8 @@ export const CartProvider = ({ children }) => {
     localStorage.removeItem("cartItems"); // Clear localStorage when cart is cleared
   };
 
-  console.log(cartItems.length, cartItems)
-const value={addToCart,removeItemFromCart, clearCart}
+  console.log(cartItems)
+const value={cartItems,addToCart,removeItemFromCart, clearCart}
   return <CartContext.Provider value={value}>
     {children}</CartContext.Provider>;
 };

@@ -1,6 +1,8 @@
 import React from "react";
 import productImage from "/hero0.jpg";
+import useCart from "../context/hooks/useCart";
 const ProductCard = ({product}) => {
+  const {addToCart,removeItemFromCart}=useCart()
   return (
     <div className="bg-white border rounded-lg  overflow-hidden  mx-6">
       <img
@@ -17,7 +19,7 @@ const ProductCard = ({product}) => {
             <p className="text-slate-400 line-through ">${product.oldPrice}</p>
             <p className="text-blue-500 font-bold">${product.newPrice}</p>
           </div>
-          <div className="px-4 py-2 rounded-md text-blue-400 bg-blue-200 border border-blue-500 ">Add</div>
+          <button className="px-4 py-2 rounded-md text-blue-400 bg-blue-200 border border-blue-500 " onClick={()=>addToCart(product)}>Add</button>
         </div>
       </div>
     </div>
