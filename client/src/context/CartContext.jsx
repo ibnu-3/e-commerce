@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { CartContext } from "./hooks/useCart";
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
- const storedItems = localStorage.getItem("cartItems");
+  const [cartItems, setCartItems] = useState(() => {
+    const storedItems = localStorage.getItem("cartItems");
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
   useEffect(() => {
-    try {
-        if(storedItems){
-            return JSON.parse(storedItems)
-        }
+    try {        
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     } catch (error) {
       console.log(error.message);
@@ -33,8 +32,13 @@ export const CartProvider = ({ children }) => {
   const removeItemFromCart = (itemId) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
   };
+   const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem("cartItems"); // Clear localStorage when cart is cleared
+  };
+
   console.log(cartItems.length, cartItems)
-const value={addToCart,removeItemFromCart}
+const value={addToCart,removeItemFromCart, clearCart}
   return <CartContext.Provider value={value}>
     {children}</CartContext.Provider>;
 };

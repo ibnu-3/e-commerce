@@ -24,7 +24,7 @@ const Home = () => {
     <>
       <Navbar />
 
-      <div className="pt-20">
+      <div className="pt-20 ">
         {/* <Hero/> */}
         {filteredProducts.length === 0 ? (
           <div className="text-slate-500 p-14 flex items-center justify-center ">Oops! no product is found</div>

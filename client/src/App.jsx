@@ -9,6 +9,9 @@ import ProductDetails from "./pages/ProductDetails";
 import ProductList from "./pages/ProductList";
 import { ProductProvider } from "./context/ProductContext";
 import { CartProvider } from "./context/CartContext";
+import Dashboard from './pages/Admin/Dashboard'
+import AddProduct from './pages/Admin/AddProduct'
+import EditProduct from './pages/Admin/EditProduct'
 const App = () => {
   return (
     <BrowserRouter>
@@ -20,7 +23,9 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/" element={<Home />} />
               <Route path="/:id" element={<ProductDetails />} />
-              <Route path="/products" element={<ProductList />} />
+              <Route path="/admin" element={<PrivateRoute><Dashboard/> </PrivateRoute>} />
+              <Route path="/admin/add" element={<PrivateRoute><AddProduct/> </PrivateRoute>} />
+              <Route path="/admin/edit" element={<PrivateRoute><EditProduct/> </PrivateRoute>} />
             </Routes>
           </ProductProvider>
         </CartProvider>

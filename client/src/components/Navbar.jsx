@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useAuth from '../context/useAuth'
 import {MdClose, MdSearch, MdShoppingCart} from 'react-icons/md'
 import {Link, useNavigate} from 'react-router-dom'
 import Search from './Search'
+import Profile from './Profile'
 const Navbar = () => {
+  const [open, setOpen]=useState(false)
    const { user,logout } = useAuth()
    const navigate=useNavigate()
    const handleLogout =async()=>{
@@ -25,8 +27,9 @@ const Navbar = () => {
           <span className='bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full -ml-4 -mt-3'>20</span>
         </div>
         {user ?(<div className='flex items-center gap-3'>
-        <div className=''>
+        <div className='' onClick={()=>setOpen(!open)}>
           {user?.profilePic ? (<img src={user?.profilePic} alt="profile pic" className='w-10 h-10 rounded-full object-cover'/>):(<div className='w-10 h-10 rounded-full bg-purple-600 text-slate-50 flex items-center justify-center'>{user.name[0].toUpperCase()}</div>)}
+          <Profile open={open} />
         </div>
         <div>
           <button onClick={handleLogout} className='bg-blue-500 text-slate-300 rounded-md px-2 py-1'>Logout</button></div>
