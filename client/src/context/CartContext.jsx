@@ -35,15 +35,15 @@ export const CartProvider = ({ children }) => {
         return [...prevItems, { ...item, quantity: 1 }];
       }
     });
-  };
-  const removeItemFromCart = (itemId) => {
+  }
+  const removeFromCart = (itemId) => {
     setCartItems((prevItems) => prevItems.filter((item) => item._id !== itemId));
   };
-  const updateCart =(quantity, id)=>{
+  const updateCart =(id)=>{
     setCartItems((prevItems)=>{
       const existingItemIndex = prevItems.findIndex(cartItem=> cartItem._id=== id);
       if(existingItemIndex >=0){
-        return prevItems.map((item,index)=> index=== existingItemIndex ? {...item, quantity}: item)
+        return prevItems.map((item,index)=> index=== existingItemIndex ? {...item, quantity:item.quantity - 1}: item)
       }
       return prevItems;
     })
@@ -52,8 +52,8 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
     localStorage.removeItem("cartItems"); // Clear localStorage when cart is cleared
   };
-
+const totalPrice = cartItems.reduce((acc,item)=>acc + item.newPrice * item.quantity, 0)
   console.log(cartItems);
-  const value = { cartItems, addToCart, updateCart,removeItemFromCart, clearCart };
+  const value = { cartItems, addToCart, updateCart,removeFromCart, clearCart, totalPrice };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
