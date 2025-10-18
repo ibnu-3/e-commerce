@@ -2,10 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { ProductContext } from "./useProduct";
 
-
 export const ProductProvider =({children})=>{
     const [products, setProducts]=useState([])
     const [product, setProduct]=useState({})
+   
      const [searchTerm, setSearchTerm] = useState("");
    useEffect(()=>{
     const fetchProducts =async () => {
@@ -19,6 +19,7 @@ export const ProductProvider =({children})=>{
     };
     fetchProducts()
    },[])
+ 
     const value={products, searchTerm, setSearchTerm}
     return(
         <ProductContext.Provider value={value}>
