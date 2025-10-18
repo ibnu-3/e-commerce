@@ -9,26 +9,51 @@ import ProductDetails from "./pages/ProductDetails";
 import ProductList from "./pages/ProductList";
 import { ProductProvider } from "./context/ProductContext";
 import { CartProvider } from "./context/CartContext";
-import Dashboard from './pages/Admin/Dashboard'
-import AddProduct from './pages/Admin/AddProduct'
-import EditProduct from './pages/Admin/EditProduct'
+import Dashboard from "./pages/Admin/Dashboard";
+import AddProduct from "./pages/Admin/AddProduct";
+import EditProduct from "./pages/Admin/EditProduct";
+import Cart from "./pages/Cart";
+import Navbar from "./components/Navbar";
 const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <CartProvider>
-          <ProductProvider>
+        <ProductProvider>
+          <CartProvider>
+            <Navbar />
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/" element={<Home />} />
-              <Route path="/:id" element={<ProductDetails />} />
-              <Route path="/admin" element={<PrivateRoute><Dashboard/> </PrivateRoute>} />
-              <Route path="/admin/add" element={<PrivateRoute><AddProduct/> </PrivateRoute>} />
-              <Route path="/admin/edit" element={<PrivateRoute><EditProduct/> </PrivateRoute>} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/details/:id" element={<ProductDetails />} />
+              <Route
+                path="/admin"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />{" "}
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/admin/add"
+                element={
+                  <PrivateRoute>
+                    <AddProduct />{" "}
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/admin/edit"
+                element={
+                  <PrivateRoute>
+                    <EditProduct />{" "}
+                  </PrivateRoute>
+                }
+              />
             </Routes>
-          </ProductProvider>
-        </CartProvider>
+          </CartProvider>
+        </ProductProvider>
       </AuthProvider>
     </BrowserRouter>
   );

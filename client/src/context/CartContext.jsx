@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { CartContext } from "./hooks/useCart";
 
+
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
-    const storedItems = localStorage.getItem("cartItems");
-    return storedItems ? JSON.parse(storedItems) : [];
+    try {
+      const localCart = localStorage.getItem('cartItems');
+      return localCart ? JSON.parse(localCart) : [];
+    } catch (error) {
+      console.error("Failed to parse cart from localStorage", error);
+      return [];
+    }
   });
   useEffect(() => {
-    try {        
+    try {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     } catch (error) {
       console.log(error.message);
@@ -16,29 +22,38 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
   const addToCart = (item) => {
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find(
-        (cartItem) => cartItem.id === item._id
+      const existingItemIndex = prevItems.findIndex(
+        (cartItem) => cartItem._id === item._id
       );
-      if (existingItem) {
-        return prevItems.map((cartItem) =>
-          cartItem.id === item._id
+      if (existingItemIndex >= 0) {
+        return prevItems.map((cartItem, index) =>
+          index === existingItemIndex
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         );
+      } else {
+        return [...prevItems, { ...item, quantity: 1 }];
       }
-      return [...prevItems, { ...item, quantity: 1 }];
     });
   };
   const removeItemFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+    setCartItems((prevItems) => prevItems.filter((item) => item._id !== itemId));
   };
-   const clearCart = () => {
+  const updateCart =(quantity, id)=>{
+    setCartItems((prevItems)=>{
+      const existingItemIndex = prevItems.findIndex(cartItem=> cartItem._id=== id);
+      if(existingItemIndex >=0){
+        return prevItems.map((item,index)=> index=== existingItemIndex ? {...item, quantity}: item)
+      }
+      return prevItems;
+    })
+  }
+  const clearCart = () => {
     setCartItems([]);
     localStorage.removeItem("cartItems"); // Clear localStorage when cart is cleared
   };
 
-  console.log(cartItems)
-const value={cartItems,addToCart,removeItemFromCart, clearCart}
-  return <CartContext.Provider value={value}>
-    {children}</CartContext.Provider>;
+  console.log(cartItems);
+  const value = { cartItems, addToCart, updateCart,removeItemFromCart, clearCart };
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

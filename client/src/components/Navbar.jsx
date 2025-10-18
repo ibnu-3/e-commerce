@@ -9,6 +9,7 @@ const Navbar = () => {
   const [open, setOpen]=useState(false)
    const { user,logout } = useAuth()
     const {cartItems}=useCart()
+
    const navigate=useNavigate()
    const handleLogout =async()=>{
     await logout()
@@ -17,15 +18,17 @@ const Navbar = () => {
   
   return (
     <div className='fixed w-full flex items-center justify-between bg-slate-200 border-b shadow-md text-slate-500 p-4'>
-      <h1>E-commerce</h1>
+      <Link to={'/'}>E-commerce</Link>
       <div className='flex items-center gap-3'>
         <div className="flex items-center gap-4">
-          <Link to={'/'}>Home</Link>
+         <div className='hidden sm:flex gap-3 items-center'>
+           <Link to={'/'}>Home</Link>
           <Link to={'/products'}>All products</Link>
-          <Search/>
+        
+          <Search/> </div>
         </div>
         <div className='flex'>
-          <MdShoppingCart size={30} className=''/>
+        <Link to={'/cart'}>  <MdShoppingCart size={30} className='' /></Link>
           <span className='bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full -ml-4 -mt-3'>{cartItems.length}</span>
         </div>
         {user ?(<div className='flex items-center gap-3'>

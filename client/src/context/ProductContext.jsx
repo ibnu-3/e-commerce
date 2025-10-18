@@ -11,7 +11,7 @@ export const ProductProvider =({children})=>{
     const fetchProducts =async () => {
         try {
             const res = await axiosInstance.get('/api/products')
-            console.log(res.data)
+          
             setProducts(res.data)
         } catch (error) {
             console.log(error)

@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ /* setCartItems((prevItems) => {
+      const existingItem = prevItems.find(
+        (cartItem) => cartItem._id === item._id
+      );
+      if (existingItem) {
+        return prevItems.map((cartItem) =>
+          cartItem._id === item._id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      }
+      return [...prevItems, { ...item, quantity: 1 }];
+    }); */
