@@ -3,7 +3,7 @@ import productImage from "/hero0.jpg";
 import useCart from "../context/hooks/useCart";
 import { Link } from "react-router-dom";
 const ProductCard = ({ product }) => {
-  const { addToCart, removeItemFromCart } = useCart();
+  const { addToCart} = useCart();
   return (
     <div className="bg-white border rounded-lg  overflow-hidden mx-6">
       <Link to={`/details/${product._id}`}>

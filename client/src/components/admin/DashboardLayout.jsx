@@ -1,8 +1,10 @@
 import React from 'react'
 
-const DashboardLayout = () => {
+const DashboardLayout = ({children, activeMenu}) => {
   return (
-    <div>DashboardLayout</div>
+    <div className='flex'>
+
+    </div>
   )
 }
 

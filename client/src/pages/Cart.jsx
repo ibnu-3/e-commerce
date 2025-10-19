@@ -1,18 +1,21 @@
 import React from "react";
 import useCart from "../context/hooks/useCart";
 import { Link } from "react-router-dom";
-import { MdDelete } from "react-icons/md";
+import { MdArrowLeft, MdDelete } from "react-icons/md";
+import Navbar from "../components/Navbar";
 
 const Cart = () => {
   const { cartItems,addToCart,removeFromCart,updateCart,totalPrice } = useCart();
   console.log(cartItems);
   return cartItems.length === 0 ?(<div className="flex flex-col gap-6 items-center justify-center">
-    <p className="pt-24 text-slate-500 text-center">No items are added</p>
+  <Navbar />
+    <p className=" text-slate-500 text-center">No items are added</p>
     <Link to={'/'} className="px-4 py-2 rounded-md bg-slate-600 text-slate-50">Go to Shopping</Link>
   </div>):(
-    <div className="pt-24">
-      <h1 className="my-4 text-2xl text-center">Your cart</h1>
-      <div className="flex items-center justify-between border-b rounded-md px-4 font-bold">
+    <div className="">
+    <Navbar />
+      <h1 className="pt-24 text-2xl text-center font-bold underline capitalize">Your cart</h1>
+      <div className="flex items-center justify-between border-b rounded-md p-4 font-bold ">
         <h2 className=" ">Product Name</h2>
         <p className="">Price</p>
         <p>Action</p>
@@ -44,9 +47,12 @@ const Cart = () => {
           </li>
         ))}
       </ul>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 px-6">
         <p className="font-bold text-right underline">Total Price: ${totalPrice.toFixed(2)}</p>
-        <Link to={'/checkout'} className="px-4 py-2 rounded-md bg-gray-600 hover:bg-gray-700 text-gray-50 w-full text-center">Checkout</Link>
+       <div className="flex flex-col sm:flex-row gap-6 items-center justify-between mt-14 ">
+         <Link to={'/'} className="border bg-blue-100  rounded-md px-4 py-2 text-blue-600 font-bold text-xl w-full flex items-center justify-center"><MdArrowLeft size={30}/> Continue Shopping</Link>
+         <Link to={'/checkout'} className="px-4 py-2 rounded-md bg-gray-600 hover:bg-gray-700 text-gray-50  text-center w-full">Go to Checkout</Link>
+       </div>
       </div>
     </div>
   );
