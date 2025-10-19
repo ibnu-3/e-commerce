@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardLayout from '../../components/admin/DashboardLayout'
 
 const AddProduct = () => {
   return (
-    <div>AddProduct</div>
+    <DashboardLayout activeMenu={'Add Product'}>AddProduct</DashboardLayout>
   )
 }
 

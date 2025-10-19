@@ -14,6 +14,7 @@ import AddProduct from "./pages/Admin/AddProduct";
 import EditProduct from "./pages/Admin/EditProduct";
 import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
+import Products from "./pages/Admin/Products";
 const App = () => {
   return (
     <BrowserRouter>
@@ -40,6 +41,14 @@ const App = () => {
                 element={
                   <PrivateRoute>
                     <AddProduct />{" "}
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/admin/products"
+                element={
+                  <PrivateRoute>
+                    <Products />{" "}
                   </PrivateRoute>
                 }
               />

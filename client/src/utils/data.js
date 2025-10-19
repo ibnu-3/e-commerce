@@ -16,7 +16,7 @@ export const SIDEBAR_ITEMS=[
         id:3,
         icon: MdList,
         label: "Products",
-        path:'/products'
+        path:'/admin/products'
     },
    
     {
