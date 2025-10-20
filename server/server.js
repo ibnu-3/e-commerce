@@ -16,8 +16,8 @@ app.use(cors({
     credentials:true,
 }))
 app.use(cookieParser())
-app.use(express.json())
-// app.use(morgan('dev'))
+  app.use(express.json({ limit: '10mb' }));  // Adjust '10mb' as necessary.
+   app.use(express.urlencoded({ limit: '10mb', extended: true })); // For form data
 connectDB()
 app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes)
