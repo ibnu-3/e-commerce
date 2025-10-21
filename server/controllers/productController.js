@@ -108,6 +108,7 @@ export const deleteProduct = async (req, res) => {
             return res.status(404).json({ message: "product not found" })
         }
         if (req.user && req.user.isAdmin) {
+           
             await product.deleteOne();
             return res.status(200).json({ message: "product deleted" })
         } else {

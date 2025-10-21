@@ -6,7 +6,7 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import ProductDetails from "./pages/ProductDetails";
-import ProductList from "./pages/ProductList";
+
 import { ProductProvider } from "./context/ProductContext";
 import { CartProvider } from "./context/CartContext";
 import Dashboard from "./pages/Admin/Dashboard";

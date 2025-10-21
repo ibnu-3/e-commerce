@@ -4,20 +4,27 @@ import { Link, useParams } from 'react-router-dom'
 import axiosInstance from '../utils/axiosInstance'
 import useCart from '../context/hooks/useCart'
 import Navbar from '../components/Navbar'
+import Loader from '../components/Loader'
 
 const ProductDetails = () => {
   const [product,setProduct]=useState({})
+  const [loading,setLoading]=useState(false)
   const {addToCart} =useCart()
+  
   const {id}=useParams()
     useEffect(()=>{
     const fetchProduct =async () => {
+      setLoading(true)
         try {
             const res = await axiosInstance.get(`/api/products/${id}`)      
             console.log(res.data)    
             setProduct(res.data)
+            setLoading(false)
         } catch (error) {
             console.log(error)
-            throw new Error("Error fetching product", error);            
+             setLoading(false)    
+            throw new Error("Error fetching product", error); 
+                  
         }
     };
     fetchProduct()
@@ -26,7 +33,11 @@ const ProductDetails = () => {
   return (
     <>
     <Navbar/>
-      <div className='pt-24 px-6 '>
+       {loading ? (
+        <>
+          <Loader />
+        </>
+      ) : (<div className='pt-24 px-6 '>
       <Link className='px-4 py-2 rounded-md bg-slate-600 text-slate-50' to={'/'}> Back to Home</Link>
       <div className='my-4 flex flex-col sm:flex-row gap-8 w-full'>
      <div className='flex-1 overflow-hidden rounded-md'> <img src={product.image} alt='image' className='h-48 sm:h-96  w-full object-cover '/></div>
@@ -42,7 +53,7 @@ const ProductDetails = () => {
         </div>
       </div>
       </div>
-    </div>
+    </div>)}
     </>
   )
 }

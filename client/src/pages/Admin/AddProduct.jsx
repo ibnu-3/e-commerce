@@ -82,7 +82,7 @@ const AddProduct = () => {
           // Reset other fields as well
         });
         setImage(null);
-        navigate('/')
+        navigate('/admin/products')
         setLoading(false)
       } else {
         setError("Failed to add product: " + response.data.message);
