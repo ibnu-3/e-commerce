@@ -18,7 +18,7 @@ const Sidebar = ({activeMenu}) => {
     navigate('/login')
   }
   return (
-    <div className='w-48 shadow-md border-t-2 h-screen fixed top-24 bg-white'>
+    <div className='w-48  shadow-md border-t-2 h-screen fixed top-24 bg-white'>
        <ul className='space-y-6'>
         {SIDEBAR_ITEMS.map((item)=>(
           <li key={item.id} className={activeMenu === item.label ? 'bg-blue-50 text-blue-800 border-r-4 border-blue-500 ':''}>

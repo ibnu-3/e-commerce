@@ -4,7 +4,7 @@ export const SIDEBAR_ITEMS=[
         id:1,
         icon: MdDashboard,
         label: "Dashboard",
-        path:'/admin'
+        path:'/admin/products'
     },
     {
         id:2,
@@ -12,12 +12,7 @@ export const SIDEBAR_ITEMS=[
         label: "Add Product",
         path:'/admin/add'
     },
-    {
-        id:3,
-        icon: MdList,
-        label: "Products",
-        path:'/admin/products'
-    },
+   
    
     {
         id:4,

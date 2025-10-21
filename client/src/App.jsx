@@ -11,31 +11,22 @@ import { ProductProvider } from "./context/ProductContext";
 import { CartProvider } from "./context/CartContext";
 import Dashboard from "./pages/Admin/Dashboard";
 import AddProduct from "./pages/Admin/AddProduct";
-import EditProduct from "./pages/Admin/EditProduct";
+
 import Cart from "./pages/Cart";
-import Navbar from "./components/Navbar";
-import Products from "./pages/Admin/Products";
+
 const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
         <ProductProvider>
           <CartProvider>
-            
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/" element={<Home />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/details/:id" element={<ProductDetails />} />
-              <Route
-                path="/admin"
-                element={
-                  <PrivateRoute>
-                    <Dashboard />{" "}
-                  </PrivateRoute>
-                }
-              />
+
               <Route
                 path="/admin/add"
                 element={
@@ -48,15 +39,7 @@ const App = () => {
                 path="/admin/products"
                 element={
                   <PrivateRoute>
-                    <Products />{" "}
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/admin/edit"
-                element={
-                  <PrivateRoute>
-                    <EditProduct />{" "}
+                    <Dashboard />{" "}
                   </PrivateRoute>
                 }
               />
