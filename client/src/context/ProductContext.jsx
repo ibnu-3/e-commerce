@@ -4,9 +4,13 @@ import { ProductContext } from "./useProduct";
 
 export const ProductProvider =({children})=>{
     const [products, setProducts]=useState([])
-    const [product, setProduct]=useState({})
+    const [productChange, setProductChange]=useState(false)
    
      const [searchTerm, setSearchTerm] = useState("");
+
+     const handleProductChange=()=>{
+        setProductChange(!productChange)
+     }
    useEffect(()=>{
     const fetchProducts =async () => {
         try {
@@ -18,9 +22,9 @@ export const ProductProvider =({children})=>{
         }
     };
     fetchProducts()
-   },[])
+   },[productChange])
  
-    const value={products, searchTerm, setSearchTerm}
+    const value={products, searchTerm, setSearchTerm, handleProductChange}
     return(
         <ProductContext.Provider value={value}>
             {children}

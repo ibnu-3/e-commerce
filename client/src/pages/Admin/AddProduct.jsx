@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../components/admin/DashboardLayout";
 import axiosInstance from "../../utils/axiosInstance";
+import useProduct from "../../context/useProduct";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const {handleProductChange}=useProduct()
+  const navigate=useNavigate()
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -12,6 +16,7 @@ const AddProduct = () => {
   });
 
   const [image, setImage] = useState(null); // State to store the selected image file
+  const [loading, setLoading] = useState(false); // State to store the selected image file
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -36,6 +41,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true)
     setSuccessMessage("");
 
     try {
@@ -64,6 +70,7 @@ const AddProduct = () => {
       if (response.status === 201) {
         // Assuming 201 Created is the success status
         setSuccessMessage("Product added successfully!");
+        handleProductChange()
         // Clear the form after successful submission
         setFormData({
           name: "",
@@ -75,13 +82,17 @@ const AddProduct = () => {
           // Reset other fields as well
         });
         setImage(null);
+        navigate('/')
+        setLoading(false)
       } else {
-        setError("Failed to add product: " + response.data.message); //Example: grab the message from the backend
+        setError("Failed to add product: " + response.data.message);
+        setLoading(false)
       }
     } catch (err) {
       console.error("Error adding product:", err);
 
       setError(err.message || "Failed to add product."); //Handle more specific axios errors if needed (err.response.data)
+      setLoading(false)
     }
   };
   return (
@@ -217,9 +228,10 @@ const AddProduct = () => {
 
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            disabled={loading}
+            className="bg-blue-500 disabled:bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Add Product
+          {loading ? "Adding": 'Add Product'}
           </button>
         </form>
       </div>

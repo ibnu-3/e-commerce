@@ -21,7 +21,7 @@ const Navbar = () => {
       <Link to={'/'}>E-commerce</Link>
       <div className='flex items-center gap-3'>
         <div className="flex items-center gap-4">
-         <div className='hidden sm:flex gap-3 items-center'>
+         <div className='hidden md:flex gap-3 items-center'>
            <Link to={'/'}>Home</Link>
           <Link to={'/products'}>All products</Link>
         
@@ -29,7 +29,7 @@ const Navbar = () => {
         </div>
         <div className='flex'>
         <Link to={'/cart'}>  <MdShoppingCart size={30} className='' /></Link>
-          <span className='bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full -ml-4 -mt-3'>{cartItems.length}</span>
+         {cartItems.length >0 && <span className='bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full -ml-4 -mt-3'>{cartItems.length}</span>}
         </div>
         {user ?(<div className='flex items-center gap-3'>
         <div className='' onClick={()=>setOpen(!open)}>
