@@ -5,7 +5,7 @@ import Sidebar from './Sidebar'
 const DashboardLayout = ({children, activeMenu}) => {
   return (
     <>
-    <Header />
+    <Header activeMenu={activeMenu}/>
       <div className='flex gap-4 bg-slate-100'>
       <div className='bg-white hidden sm:flex '>
         <Sidebar activeMenu={activeMenu}/>

@@ -19,7 +19,6 @@ const ProductDetails = () => {
             const res = await axiosInstance.get(`/api/products/${id}`)      
                
             setProduct(res.data)
-            console.log(res.data)
             setLoading(false)
         } catch (error) {
             console.log(error)
