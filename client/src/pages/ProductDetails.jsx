@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import useProduct from '../context/useProduct'
+
 import { Link, useParams } from 'react-router-dom'
 import axiosInstance from '../utils/axiosInstance'
 import useCart from '../context/hooks/useCart'
@@ -17,8 +17,9 @@ const ProductDetails = () => {
       setLoading(true)
         try {
             const res = await axiosInstance.get(`/api/products/${id}`)      
-            console.log(res.data)    
+               
             setProduct(res.data)
+            console.log(res.data)
             setLoading(false)
         } catch (error) {
             console.log(error)
@@ -45,11 +46,12 @@ const ProductDetails = () => {
         <h1 className='font-bold text-3xl sm:text-4xl capitalize '>{product.name}</h1>
         <p className='text-slate-500 text-3xl py-4 capitalize'>{product.category}</p>
 
-        <p className='font-bold capitalize '><span className='font-thin text-slate-500 line-through pr-6 text-sm'>Old price: ${product.oldPrice} </span> New Price: ${product.newPrice}  </p>
-                <p>Description: {product.description}</p>
-        <div className='flex items-center mt-14 gap-6'>
-          <button className='px-5 py-3 bg-slate-300 text-slate-800 hover:bg-slate-400 flex-1' onClick={()=>addToCart(product)}>Add To Cart</button>
-          <button className='px-5 py-3 my-4 bg-blue-600 text-slate-100 hover:bg-blue-700 flex-1'>Buy Now</button>
+        <p className='font-bold capitalize '><span className='font-thin text-slate-500 line-through pr-6 text-sm'>  ${product.oldPrice} </span> 
+         ${product.newPrice}  </p>
+                <p className='text-slate-500 pt-3 leading-6 text-sm'><span className='text-slate-800'>Description: <br/></span> {product.description} </p>
+        <div className='flex  items-center mt-14 gap-6'>
+          <button className='px-3 sm:px-5 py-3 rounded-md bg-slate-300 text-slate-800 hover:bg-slate-400 flex-1' onClick={()=>addToCart(product)}>Add To Cart</button>
+          <button className='px-3 sm:px-5 py-3 rounded-md my-4 bg-blue-600 text-slate-100 hover:bg-blue-700 flex-1'>Buy Now</button>
         </div>
       </div>
       </div>

@@ -28,7 +28,7 @@ export const getOneProduct = async (req, res) => {
 
 //create product 
 export const createProduct = async (req, res) => {
-    const { name, category, oldPrice,image, newPrice, countInStock } = req.body;
+    const { name, category, oldPrice,image, newPrice,description, countInStock } = req.body;
    
     try {
 
@@ -50,6 +50,7 @@ export const createProduct = async (req, res) => {
                 category,
                 image: imageUrl,
                 oldPrice,
+                description,
                 newPrice,
                 countInStock,
                 user: req.user._id
@@ -79,6 +80,7 @@ export const updateProduct = async (req, res) => {
             product.category = category || product.category;
             product.oldPrice = oldPrice || product.oldPrice;
             product.newPrice = newPrice || product.newPrice;
+            product.description = description || product.description;
             product.countInStock = countInStock || product.countInStock;
             product.isPinned = isPinned || product.isPinned;
 

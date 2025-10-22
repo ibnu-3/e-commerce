@@ -1,9 +1,10 @@
 import React from 'react'
 import DashboardLayout from '../../components/admin/DashboardLayout'
-import useProduct from '../../context/useProduct'
+
 import { MdDelete, MdEdit } from 'react-icons/md'
 import Loader from '../../components/Loader'
 import { Link } from 'react-router-dom'
+import useProduct from '../../context/hooks/useProduct'
 
 const Dashboard = () => {
     const {products, loading, deleteProduct}=useProduct()

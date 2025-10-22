@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
-import useProduct from "../context/useProduct";
+import useProduct from "../context/hooks/useProduct";
 import axiosInstance from "../utils/axiosInstance";
 
 const Search = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import useAuth from '../../context/useAuth'
+import useAuth from '../../context/hooks//useAuth'
 import { SIDEBAR_ITEMS } from '../../utils/data'
 import { useNavigate } from 'react-router-dom'
 

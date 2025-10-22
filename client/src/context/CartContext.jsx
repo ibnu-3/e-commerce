@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { CartContext } from "./hooks/useCart";
+import useAuth from "./hooks/useAuth";
 
 
 export const CartProvider = ({ children }) => {
+  const {user}=useAuth()
   const [cartItems, setCartItems] = useState(() => {
     try {
       const localCart = localStorage.getItem('cartItems');
@@ -50,10 +52,9 @@ export const CartProvider = ({ children }) => {
   }
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem("cartItems"); // Clear localStorage when cart is cleared
-  };
+    localStorage.removeItem("cartItems");   };
 const totalPrice = cartItems.reduce((acc,item)=>acc + item.newPrice * item.quantity, 0)
-  console.log(cartItems);
+ 
   const value = { cartItems,addToCart, updateCart,removeFromCart, clearCart, totalPrice };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

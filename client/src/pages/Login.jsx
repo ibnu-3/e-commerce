@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import useAuth from "../context/useAuth";
+import useAuth from "../context/hooks/useAuth";
 
-import { toast } from "react-toastify";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,12 +19,10 @@ const Login = () => {
     const userData={email, password}
     try {
       await login(userData);
-      toast.success('Login in successfully!')
       navigate('/')
       setLoading(false);
     } catch (error) {
       console.log(error);
-      toast.error(error || 'failed to login');
       setLoading(false);
     } 
   };

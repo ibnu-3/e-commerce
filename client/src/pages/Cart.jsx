@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 
 const Cart = () => {
   const { cartItems,addToCart,clearCart,removeFromCart,updateCart,totalPrice } = useCart();
-  console.log(cartItems);
   return cartItems.length === 0 ?(
   <>  <Navbar />
   <div className="flex flex-col gap-8 h-screen items-center justify-center ">
@@ -51,11 +50,11 @@ const Cart = () => {
       </ul>
       <div className="flex flex-col gap-3 px-6">
         <p className="font-bold text-right underline">Total Price: ${totalPrice.toFixed(2)}</p>
-        <p className="w-28 px-3 py-2 bg-red-600 hover:bg-red-800 text-slate-100  rounded-md text-center cursor-pointer" onClick={clearCart}>Clear Cart</p>
+        <p className=" px-3 py-1 w-24 bg-red-600 hover:bg-red-800 text-slate-100  rounded-md text-left text-sm block cursor-pointer" onClick={clearCart}>Clear Cart</p>
         
        <div className="flex flex-col sm:flex-row gap-6 items-center justify-between mt-14 ">
          <Link to={'/'} className="border bg-blue-100  rounded-md px-4 py-2 text-blue-600  text-xl w-full flex items-center justify-center"><MdArrowLeft size={30}/> Continue Shopping</Link>
-         <Link to={'/checkout'} className="px-4 py-2 rounded-md bg-gray-600 hover:bg-gray-700 text-gray-50  text-center w-full">Go to Checkout</Link>
+         <button  className="px-4 py-2 rounded-md bg-gray-600 hover:bg-gray-700 text-gray-50  text-center w-full">Go to Checkout</button>
        </div>
       </div>
     </div>

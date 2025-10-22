@@ -1,5 +1,5 @@
 import React from 'react'
-import useAuth from '../../context/useAuth'
+import useAuth from '../../context/hooks/useAuth'
 import {Link, useNavigate} from 'react-router-dom'
 const Header = () => {
     const {user,logout}=useAuth()
@@ -9,7 +9,7 @@ const Header = () => {
       navigate('/login')
     }
   return (
-    <div className='fixed flex justify-between items-center z-50 w-full shadow-lg border-b p-4'>
+    <div className='fixed flex justify-between items-center z-50 bg-white w-full shadow-lg border-b p-4'>
         <Link to={'/'}>E-commerce</Link>
         <div className='flex items-center gap-6  '>
             <p className='capitalize '>{user?.name}</p>

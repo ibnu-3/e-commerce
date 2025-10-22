@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import { ProductContext } from "./useProduct";
+import { ProductContext } from "./hooks/useProduct";
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
@@ -14,12 +14,15 @@ export const ProductProvider = ({ children }) => {
   };
   useEffect(() => {
     const fetchProducts = async () => {
+     
       try {
         const res = await axiosInstance.get("/api/products");
 
         setProducts(res.data);
+       
       } catch (error) {
         console.log(error);
+         
       }
     };
     fetchProducts();

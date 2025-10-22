@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../components/admin/DashboardLayout";
 import axiosInstance from "../../utils/axiosInstance";
-import useProduct from "../../context/useProduct";
+import useProduct from "../../context/hooks/useProduct";
 import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
@@ -10,13 +10,14 @@ const AddProduct = () => {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
+    description: "",
     oldPrice: "",
     newPrice: "",
     countInStock: "",
   });
 
-  const [image, setImage] = useState(null); // State to store the selected image file
-  const [loading, setLoading] = useState(false); // State to store the selected image file
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -34,7 +35,7 @@ const AddProduct = () => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
-      reader.readAsDataURL(file); // Read file as base64
+      reader.readAsDataURL(file); 
     });
   };
 
@@ -45,7 +46,7 @@ const AddProduct = () => {
     setSuccessMessage("");
 
     try {
-      // Validate input (basic example)
+      
       if (
         !formData.name ||
         !formData.category ||
@@ -62,24 +63,25 @@ const AddProduct = () => {
 
       const productData = {
         ...formData,
-        image: base64Image, // Send the base64 encoded image
+        image: base64Image,
       };
 
-      // Send the data to your backend endpoint (e.g., /api/products)
-      const response = await axiosInstance.post("/api/products", productData); // Adjust the URL to match your backend route
+     
+      const response = await axiosInstance.post("/api/products", productData); 
       if (response.status === 201) {
-        // Assuming 201 Created is the success status
+        
         setSuccessMessage("Product added successfully!");
         handleProductChange()
-        // Clear the form after successful submission
+        
         setFormData({
           name: "",
           category: "",
+          description: "",
           oldPrice: "",
           newPrice: "",
           countInStock: "",
 
-          // Reset other fields as well
+         
         });
         setImage(null);
         navigate('/admin/products')
@@ -91,7 +93,7 @@ const AddProduct = () => {
     } catch (err) {
       console.error("Error adding product:", err);
 
-      setError(err.message || "Failed to add product."); //Handle more specific axios errors if needed (err.response.data)
+      setError(err.message || "Failed to add product."); 
       setLoading(false)
     }
   };
@@ -138,6 +140,7 @@ const AddProduct = () => {
             />
           </div>
 
+         
           <div className="mb-4">
             <label
               htmlFor="category"
@@ -201,6 +204,23 @@ const AddProduct = () => {
               id="countInStock"
               name="countInStock"
               value={formData.countInStock}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+           <div className="mb-4">
+            <label
+              htmlFor="description"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+             Description:
+            </label>
+            <textarea
+            rows={3}
+              type="text"
+              id="description"
+              name="description"
+              value={formData.description}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
