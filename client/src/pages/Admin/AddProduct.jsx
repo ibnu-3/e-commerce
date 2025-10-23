@@ -253,6 +253,7 @@ const AddProduct = () => {
           >
           {loading ? "Adding": 'Add Product'}
           </button>
+          
         </form>
       </div>
     </DashboardLayout>
