@@ -1,7 +1,7 @@
 import axios from "axios";
-
+const API_BASE_URL= import.meta.env.VITE_API_BASE_URL || "https://fluffy-carnival-v67567vw7xg53x966-8080.app.github.dev";
 const axiosInstance = axios.create({
-  baseURL: "https://fluffy-carnival-v67567vw7xg53x966-8080.app.github.dev",
+  baseURL: API_BASE_URL,
   withCredentials: true,
 });
 axiosInstance.interceptors.request.use(

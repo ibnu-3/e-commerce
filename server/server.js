@@ -10,7 +10,7 @@ import morgan from "morgan"
 const app= express()
 
 app.use(cors({
-    origin:process.env.FRONTEND_URL,
+    origin:process.env.FRONTEND_URL || "https://fluffy-carnival-v67567vw7xg53x966-5173.app.github.dev",
     methods:['POST','GET','PUT','DELETE','PATCH','OPTIONS','HEAD'],
     allowedHeaders:['Content-Type','Authorization','Cookie','X-Custom-Head'],
     credentials:true,
